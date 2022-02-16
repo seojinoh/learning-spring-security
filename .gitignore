@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/windows,macos,eclipse,intellij,visualstudiocode,java,gradle
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,eclipse,intellij,visualstudiocode,java,gradle
+# Created by https://www.toptal.com/developers/gitignore/api/windows,macos,eclipse,intellij,visualstudiocode,java,maven,git
+# Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,eclipse,intellij,visualstudiocode,java,maven,git
 
 ### Eclipse ###
 .metadata
@@ -66,6 +66,21 @@ local.properties
 ### Eclipse Patch ###
 # Spring Boot Tooling
 .sts4-cache/
+
+### Git ###
+# Created by git for backups. To disable backups in Git:
+# $ git config --global mergetool.keepBackup false
+*.orig
+
+# Created by git when using merge tools for conflicts
+*.BACKUP.*
+*.BASE.*
+*.LOCAL.*
+*.REMOTE.*
+*_BACKUP_*.txt
+*_BASE_*.txt
+*_LOCAL_*.txt
+*_REMOTE_*.txt
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
@@ -231,6 +246,25 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+### Maven ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# https://github.com/takari/maven-wrapper#usage-without-binary-jar
+.mvn/wrapper/maven-wrapper.jar
+
+# Eclipse m2e generated files
+# Eclipse Core
+.project
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
@@ -278,24 +312,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-### Gradle ###
-.gradle
-**/build/
-!src/**/build/
-
-# Ignore Gradle GUI config
-gradle-app.setting
-
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
-
-# Cache of project
-.gradletasknamecache
-
-# Eclipse Gradle plugin generated files
-# Eclipse Core
-.project
-# JDT-specific (Eclipse Java Development Tools)
-.classpath
-
-# End of https://www.toptal.com/developers/gitignore/api/windows,macos,eclipse,intellij,visualstudiocode,java,gradle
+# End of https://www.toptal.com/developers/gitignore/api/windows,macos,eclipse,intellij,visualstudiocode,java,maven,git
