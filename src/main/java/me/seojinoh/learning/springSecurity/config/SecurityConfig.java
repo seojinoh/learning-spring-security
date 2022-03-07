@@ -35,13 +35,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
+		httpSecurity.csrf().disable();
+
 		httpSecurity.authorizeRequests()
-			.antMatchers("/user/**").authenticated()
-			.antMatchers("/admin/**").authenticated()
+			.antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
+			.antMatchers("/admin/**").hasAnyRole("ADMIN")
 			.antMatchers("/**").permitAll();
 
 		httpSecurity.formLogin()
 			.loginPage("/login")
+			.loginProcessingUrl("/api/login")
 			.defaultSuccessUrl("/")
 			.usernameParameter("email")
 			.passwordParameter("password")
@@ -49,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		httpSecurity.logout()
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.logoutSuccessUrl("/login")
+			.logoutSuccessUrl("/")
 			.invalidateHttpSession(true);
 
 		httpSecurity.exceptionHandling()

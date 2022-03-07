@@ -5,29 +5,40 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.Table;
 
-import me.seojinoh.learning.springSecurity.dto.MemberJoinResponse;
+import me.seojinoh.learning.springSecurity.dto.MemberInfo;
 
 @Entity
-@Table(name = "tb_member")
+@Table(name = "tb_member", indexes = {
+	@Index(name = "idx_email", columnList = "email", unique = true),
+	@Index(name = "idx_phone_number", columnList = "phone_number", unique = true),
+	@Index(name = "idx_method_and_email", columnList = "method, email", unique = true)
+})
 public class Member {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(length = 80, unique = true, nullable = false)
+	@Column(length = 80, nullable = false)
 	private String email;
 
 	@Column(length = 200, nullable = false)
 	private String password;
 
 	@Column(length = 200, nullable = false)
-	private String username;
+	private String name;
 
-	@Column(name = "phone_number", length = 200, unique = true, nullable = false)
+	@Column(name = "phone_number", length = 200, nullable = false)
 	private String phoneNumber;
+
+	@Column(length = 80, nullable = false)
+	private String roles;
+
+	@Column(length = 80, nullable = false)
+	private String method;
 
 	@Column(name = "reg_dt")
 	private String regDt;
@@ -42,19 +53,23 @@ public class Member {
 		private Integer id;
 		private String email;
 		private String password;
-		private String username;
+		private String name;
 		private String phoneNumber;
+		private String roles;
+		private String method;
 		private String regDt;
 		private String lastLoginDt;
 
 		private Builder() {
 		}
 
-		public Builder(String email, String password, String username, String phoneNumber) {
+		public Builder(String email, String password, String name, String phoneNumber, String roles, String method) {
 			this.email = email;
 			this.password = password;
-			this.username = username;
+			this.name = name;
 			this.phoneNumber = phoneNumber;
+			this.roles = roles;
+			this.method = method;
 		}
 
 		public Builder setRegDt(String regDt) {
@@ -73,18 +88,15 @@ public class Member {
 			Member member = new Member();
 			member.email = email;
 			member.password = password;
-			member.username = username;
+			member.name = name;
 			member.phoneNumber = phoneNumber;
+			member.roles = roles;
+			member.method = method;
 			member.regDt = regDt;
 			member.lastLoginDt = lastLoginDt;
 
 			return member;
 		}
-	}
-
-	public MemberJoinResponse toMemberJoinResponse() {
-		return new MemberJoinResponse.Builder(email)
-				.build();
 	}
 
 	public Integer getId() {
@@ -99,12 +111,20 @@ public class Member {
 		return password;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getName() {
+		return name;
 	}
 
 	public String getPhoneNumber() {
 		return phoneNumber;
+	}
+
+	public String getRoles() {
+		return roles;
+	}
+
+	public String getMethod() {
+		return method;
 	}
 
 	public String getRegDt() {
@@ -113,6 +133,20 @@ public class Member {
 
 	public String getLastLoginDt() {
 		return lastLoginDt;
+	}
+
+	public MemberInfo toMemberInfo() {
+		MemberInfo memberInfo = new MemberInfo();
+		memberInfo.setEmail(getEmail());
+		memberInfo.setPassword(getPassword());
+		memberInfo.setName(getName());
+		memberInfo.setPhoneNumber(getPhoneNumber());
+		memberInfo.setRoles(getRoles());
+		memberInfo.setMethod(getMethod());
+		memberInfo.setRegDt(getRegDt());
+		memberInfo.setLastLoginDt(getLastLoginDt());
+
+		return memberInfo;
 	}
 
 }
