@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Table;
 
-import me.seojinoh.learning.springSecurity.dto.MemberInfo;
+import me.seojinoh.learning.springSecurity.dto.MemberDetails;
 
 @Entity
 @Table(name = "tb_member", indexes = {
@@ -135,18 +135,18 @@ public class Member {
 		return lastLoginDt;
 	}
 
-	public MemberInfo toMemberInfo() {
-		MemberInfo memberInfo = new MemberInfo();
-		memberInfo.setEmail(getEmail());
-		memberInfo.setPassword(getPassword());
-		memberInfo.setName(getName());
-		memberInfo.setPhoneNumber(getPhoneNumber());
-		memberInfo.setRoles(getRoles());
-		memberInfo.setMethod(getMethod());
-		memberInfo.setRegDt(getRegDt());
-		memberInfo.setLastLoginDt(getLastLoginDt());
+	public MemberDetails toMemberDetails() {
+		MemberDetails memberDetails = new MemberDetails();
+		memberDetails.setEmail(getEmail());
+		memberDetails.setPassword(getPassword());
+		memberDetails.setName(getName());
+		memberDetails.setPhoneNumber(getPhoneNumber());
+		memberDetails.setRoles(getRoles());
+		memberDetails.setMethod(getMethod());
+		memberDetails.setRegDt(getRegDt());
+		memberDetails.setLastLoginDt(getLastLoginDt());
 
-		return memberInfo;
+		return memberDetails;
 	}
 
 }

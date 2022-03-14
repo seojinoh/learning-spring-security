@@ -25,7 +25,7 @@ public class MemberServiceImpl implements MemberService {
 			throw new UsernameNotFoundException(email);
 		}
 
-		return member.toMemberInfo();
+		return member.toMemberDetails();
 	}
 
 	@Override
